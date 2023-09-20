@@ -30,6 +30,22 @@ const Home = () => {
         priority : 'High'
     }
   ])
+
+  const [title , setTitle] = useState('');
+  const [description , setDescription] = useState('');
+  const [priority , setPriority] = useState('');
+
+  const addToList = () => {
+    const randomId = Math.floor(Math.random)*1000;
+    const obj = {
+      id : randomId,
+      title : title,
+      description : description,
+      priority : priority
+    }
+
+    setTask([...task ,obj])
+  }
   return (
     <div className='main-container'>
       <h1> ToDo List App</h1>
@@ -44,7 +60,22 @@ const Home = () => {
          
         </div>
         <div>
-            Add list
+            <form>
+              
+              <input type='text' value={title} onChange={(e) => {
+                    setTitle(e.target.value)
+              }}/>
+
+              <input type='text' value={description} onChange={(e) => {
+                    setDescription(e.target.value)
+              }}/>
+
+              <input type='text' value={priority} onChange={(e) => {
+                    setPriority(e.target.value)
+              }}/>
+
+              <button type='button' onClick={addToList}>Add To List</button>
+            </form>
         </div>
       </div>
     </div>
