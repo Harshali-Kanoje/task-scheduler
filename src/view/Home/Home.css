@@ -1,0 +1,11 @@
+.task-todo{
+
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+}
+
+.main-container{
+    min-height: 100vh;
+    background-color: bisque;
+}
