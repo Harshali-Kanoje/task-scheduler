@@ -35,7 +35,7 @@ const Home = () => {
   const [description , setDescription] = useState('');
   const [priority , setPriority] = useState('');
 
-  const addToList = () => {
+  const addTaskToList = () => {
     const randomId = Math.floor(Math.random)*1000;
     const obj = {
       id : randomId,
@@ -45,16 +45,41 @@ const Home = () => {
     }
 
     setTask([...task ,obj])
+
+    setTitle('');
+    setDescription('');
+    setPriority('');
   }
+
+   const removeTaskFromList = (obj) => {
+    const index = task.indexOf(obj)
+
+    const temparray = task;
+    temparray.splice(index,1)
+    setTask([...temparray])
+   }
+  // const removeTaskFromList = (id) => {
+  //   //  const index = task.indexOf(obj)
+  //    let index;
+  //    task.forEach((task,i) => {
+  //     if(task.id === id)
+  //      index = i;
+  //    })
+     
+  //    const temparray = task;
+  //    temparray.splice(index,1)
+  //    setTask([...temparray])
+  //   //  console.log(obj)
+  // }
   return (
     <div className='main-container'>
       <h1> ToDo List App</h1>
       <div className='task-todo'>
         <div>
             {
-                task.map((taskItem) => {
+                task.map((taskItem ,index) => {
                     const {id , title , description , priority} = taskItem;
-                    return <Task id={id} title={title} description={description} priority={priority}/>
+                    return <Task id={id} title={title} description={description} priority={priority} removeTaskFromList ={removeTaskFromList} obj={taskItem} key={index}/>
                 })
             }
          
@@ -65,16 +90,16 @@ const Home = () => {
               <input type='text' value={title} onChange={(e) => {
                     setTitle(e.target.value)
               }}/>
-
+              <br/>
               <input type='text' value={description} onChange={(e) => {
                     setDescription(e.target.value)
               }}/>
-
+              <br/>
               <input type='text' value={priority} onChange={(e) => {
                     setPriority(e.target.value)
               }}/>
-
-              <button type='button' onClick={addToList}>Add To List</button>
+              <br/>
+              <button type='button' onClick={addTaskToList}>Add To List</button>
             </form>
         </div>
       </div>

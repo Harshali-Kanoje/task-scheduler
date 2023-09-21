@@ -6,4 +6,12 @@
     border: 2px solid blueviolet;
     border-radius: 5px;
     width: 500px;
+    position: relative;
+}
+
+.delete-btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
 }

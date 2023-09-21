@@ -1,12 +1,16 @@
 import React from 'react'
 import './Task.css'
 
-const Task = ({id , title , description , priority}) => {
+const Task = ({id , title , description , priority , removeTaskFromList ,obj}) => {
   return (
     <div className='task-container'>
       <h1>{title}</h1>
       <h2>{description}</h2>
       <span>{priority}</span>
+      <span className='delete-btn' onClick={() => {
+        removeTaskFromList(obj)
+        // console.log(obj)
+      }}>🪣</span>
     </div>
   )
 }
