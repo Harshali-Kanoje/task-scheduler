@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Task from '../../component/Task/Task'
 import './Home.css'
 import { useState } from 'react'
@@ -35,6 +35,14 @@ const Home = () => {
   const [description , setDescription] = useState('');
   const [priority , setPriority] = useState('');
 
+  useEffect(() => {
+    const list = JSON.parse(localStorage.getItem('todo'))
+    setTask(list)
+  },[])
+
+  const saveTaskToLocalStorage = (newList) => {
+    localStorage.setItem('todo' ,JSON.stringify(newList));
+  }
   const addTaskToList = () => {
     const randomId = Math.floor(Math.random)*1000;
     const obj = {
@@ -43,21 +51,23 @@ const Home = () => {
       description : description,
       priority : priority
     }
-
-    setTask([...task ,obj])
+    const newList = [...task ,obj];
+    setTask(newList)
 
     setTitle('');
     setDescription('');
     setPriority('');
+    saveTaskToLocalStorage(newList);
   }
 
-   const removeTaskFromList = (obj) => {
+  const removeTaskFromList = (obj) => {
     const index = task.indexOf(obj)
 
     const temparray = task;
     temparray.splice(index,1)
     setTask([...temparray])
-   }
+    // saveTaskToLocalStorage([...temparray]);
+  }
   // const removeTaskFromList = (id) => {
   //   //  const index = task.indexOf(obj)
   //    let index;
@@ -73,9 +83,10 @@ const Home = () => {
   // }
   return (
     <div className='main-container'>
-      <h1> ToDo List App</h1>
+      <h1 className='todo-heading'>Task Scheduler</h1>
       <div className='task-todo'>
         <div>
+          <h2 className='task-sub-heading'>Show Task</h2>
             {
                 task.map((taskItem ,index) => {
                     const {id , title , description , priority} = taskItem;
@@ -84,20 +95,21 @@ const Home = () => {
             }
          
         </div>
-        <div>
+        <div className='input-container'>
+        <h2 className='task-sub-heading'>Add Task</h2>
             <form>
               
               <input type='text' value={title} onChange={(e) => {
                     setTitle(e.target.value)
-              }}/>
+              }} className='tast-input' placeholder='Enter Your Title'/>
               <br/>
               <input type='text' value={description} onChange={(e) => {
                     setDescription(e.target.value)
-              }}/>
+              }} className='tast-input' placeholder='Enter Your Description'/>
               <br/>
               <input type='text' value={priority} onChange={(e) => {
                     setPriority(e.target.value)
-              }}/>
+              }} className='tast-input' placeholder='Enter Your Priority'/>
               <br/>
               <button type='button' onClick={addTaskToList}>Add To List</button>
             </form>
