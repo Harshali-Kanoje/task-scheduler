@@ -49,3 +49,28 @@ text-align: center;
     text-align: center;
     font-size: 30px;
 }
+
+.task-list{
+/* background-color: rebeccapurple; */
+height: 560px;
+overflow: scroll;
+}
+
+.task-list::-webkit-scrollbar{
+    width: 5px;
+}
+
+@media screen and (max-width:600px){
+    .tast-input{
+        width: 300px;
+        margin: 10px;
+    }
+    
+    .task-list{
+        margin-top: 10px;
+    }
+
+    .input-container{
+        margin-top: 20px;
+    }
+}

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import Task from '../../component/Task/Task'
 import './Home.css'
 import { useState } from 'react'
+import showToast from 'crunchy-toast';
+import { saveTaskToLocalStorage } from '../../util/utility';
 
 const Home = () => {
   const [task , setTask] = useState([
@@ -45,9 +47,7 @@ const Home = () => {
     
   },[])
 
-  const saveTaskToLocalStorage = (newList) => {
-    localStorage.setItem('todo' ,JSON.stringify(newList));
-  }
+  
   const addTaskToList = () => {
     // const randomId = Math.floor(Math.random)*1000;
     const randomId = Math.floor(Math.random() *1000);
@@ -60,11 +60,9 @@ const Home = () => {
     const newList = [...task ,obj];
     setTask(newList)
 
-    setTitle('');
-    setDescription('');
-    setPriority('');
+    setFieldClear()
     saveTaskToLocalStorage(newList);
-    console.log(randomId)
+    showToast('Task added successfully', 'success', 3000);
   }
 
   const removeTaskFromList = (obj) => {
@@ -74,6 +72,7 @@ const Home = () => {
     temparray.splice(index,1)
     setTask([...temparray])
     saveTaskToLocalStorage([...temparray]);
+    showToast('Task remove successfully', 'alert', 6000);
   }
 
   const setTaskEditable = (id) => {
@@ -100,6 +99,7 @@ const Home = () => {
       {
         indexToUpdate = i
       }
+      showToast('Task updated successfully', 'info');
     })
 
     const tempAarry = task;
@@ -116,7 +116,12 @@ const Home = () => {
 
     setId(-1)
     setIsEdit(false)
+    setFieldClear()
+    // instead of doing this repetadly we can make a function for same task
     
+  }
+
+  const setFieldClear = () => {
     setDescription('')
     setTitle('')
     setPriority('')
@@ -143,12 +148,15 @@ const Home = () => {
       <div className='task-todo'>
         <div>
           <h2 className='task-sub-heading'>Show Task</h2>
-            {
+          <div className='task-list'>
+          {
                 task.map((taskItem ,index) => {
                     const {id , title , description , priority} = taskItem;
                     return <Task id={id} title={title} description={description} priority={priority} removeTaskFromList ={removeTaskFromList} obj={taskItem} key={index} setTaskEditable={setTaskEditable}/>
                 })
             }
+          </div>
+            
          
         </div>
         <div className='input-container'>
