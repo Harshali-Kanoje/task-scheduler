@@ -12,15 +12,17 @@
 }
 
 .task-container h1{
-    margin: 5px 0;
+    margin: 25px 0 5px;
     color: rgb(196, 91, 91);
     font-size: 25px;
+    overflow-wrap: break-word;
 }
 
 .task-container h2{
     margin: 5px 0;
     color: rgb(118, 117, 117);
     font-size: 20px;
+    overflow-wrap: break-word;
 }
 .delete-btn {
     position: absolute;
@@ -41,6 +43,7 @@
   font-weight: bold;
   width: 71px;
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 span .edit-btn {

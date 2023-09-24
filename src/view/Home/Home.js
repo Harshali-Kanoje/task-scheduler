@@ -32,23 +32,26 @@ const Home = () => {
   
   const addTaskToList = () => {
 
-    if(!title)
-    {
-      showToast('Title is required', 'warning', 3000);
-      return
+    if(checkRequiredFileds() === false){
+      return 
     }
+    // if(!title)
+    // {
+    //   showToast('Title is required', 'warning', 3000);
+    //   return
+    // }
 
-    if(!description)
-    {
-      showToast('Description is required', 'warning', 3000);
-      return
-    }
+    // if(!description)
+    // {
+    //   showToast('Description is required', 'warning', 3000);
+    //   return
+    // }
 
-    if(!priority)
-    {
-      showToast('Priority is required', 'warning', 3000);
-      return
-    }
+    // if(!priority)
+    // {
+    //   showToast('Priority is required', 'warning', 3000);
+    //   return
+    // }
     // const randomId = Math.floor(Math.random)*1000;
     const randomId = Math.floor(Math.random() *1000);
     const obj = {
@@ -92,6 +95,10 @@ const Home = () => {
   }
 
   const UpdateTask = () => {
+    if(checkRequiredFileds() === false){
+      return 
+    }
+
     let indexToUpdate;
     task.forEach((task,i) => {
       if(task.id===id)
@@ -132,6 +139,28 @@ const Home = () => {
     setPriority('')
     setIsEdit(false)
     setId(null)
+  }
+
+  const checkRequiredFileds = () => {
+
+    if(!title)
+    {
+      showToast('Title is required', 'warning', 3000);
+      return false
+    }
+
+    if(!description)
+    {
+      showToast('Description is required', 'warning', 3000);
+      return false
+    }
+
+    if(!priority)
+    {
+      showToast('Priority is required', 'warning', 3000);
+      return false
+    }
+    return true
   }
   // const removeTaskFromList = (id) => {
   //   //  const index = task.indexOf(obj)
