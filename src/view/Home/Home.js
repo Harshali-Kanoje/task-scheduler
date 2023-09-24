@@ -12,24 +12,6 @@ const Home = () => {
         title : 'Assignment Completion',
         description : 'Otherwise not allow in the class',
         priority : 'Very High'
-    },
-    {
-        id : '2',
-        title : 'WakeUp at 6am',
-        description : 'Otherwise class will be missing',
-        priority : 'Very High'
-    },
-    {
-        id : '3',
-        title : 'Going outside',
-        description : 'Enjoy and feel better',
-        priority : 'low'
-    },
-    {
-        id : '4',
-        title : 'Eating Food',
-        description : 'For better health',
-        priority : 'High'
     }
   ])
   const [id ,setId] = useState(0)
@@ -49,6 +31,24 @@ const Home = () => {
 
   
   const addTaskToList = () => {
+
+    if(!title)
+    {
+      showToast('Title is required', 'warning', 3000);
+      return
+    }
+
+    if(!description)
+    {
+      showToast('Description is required', 'warning', 3000);
+      return
+    }
+
+    if(!priority)
+    {
+      showToast('Priority is required', 'warning', 3000);
+      return
+    }
     // const randomId = Math.floor(Math.random)*1000;
     const randomId = Math.floor(Math.random() *1000);
     const obj = {
@@ -62,8 +62,7 @@ const Home = () => {
 
     setFieldClear()
     saveTaskToLocalStorage(newList);
-    showToast('Task added successfully', 'success', 3000);
-  }
+    showToast('Task added successfully', 'success', 3000);}
 
   const removeTaskFromList = (obj) => {
     const index = task.indexOf(obj)
@@ -126,6 +125,14 @@ const Home = () => {
     setTitle('')
     setPriority('')
   }
+
+  const CancleUpdateTask = () => {
+    setDescription('')
+    setTitle('')
+    setPriority('')
+    setIsEdit(false)
+    setId(null)
+  }
   // const removeTaskFromList = (id) => {
   //   //  const index = task.indexOf(obj)
   //    let index;
@@ -175,12 +182,14 @@ const Home = () => {
                     setPriority(e.target.value)
               }} className='tast-input' placeholder='Enter Your Priority'/>
               <br/>
-              {isEdit===true?<button type='button' onClick={UpdateTask}>Update</button>:<button type='button' onClick={addTaskToList}>Add To List</button>}
+              {isEdit ?<button type='button' onClick={UpdateTask}>Update</button>:<button type='button' onClick={addTaskToList}>Add To List</button>}
+              {/* <button type='button' onClick={isEdit===true ? UpdateTask : addTaskToList}>{isEdit===true?Update:Add To List}</button> */}
+              <button type='button' onClick={CancleUpdateTask}>Cancle</button>
             </form>
         </div>
       </div>
     </div>
   )
 }
-
+ 
 export default Home

@@ -43,6 +43,7 @@ text-align: center;
     background-color: #ff9999;
     color: white;
     border-radius: 10px;
+    margin: 10px;
 }
 
 .task-sub-heading{

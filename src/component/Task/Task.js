@@ -10,7 +10,7 @@ const Task = ({id , title , description , priority , removeTaskFromList ,obj , s
       <span className='delete-btn' onClick={() => {
         removeTaskFromList(obj)
         // console.log(obj)
-      }}>🪣</span>
+      }}>❌ </span>
       <span className='edit-btn' onClick={() => {
         setTaskEditable(id)
         // console.log(obj)
