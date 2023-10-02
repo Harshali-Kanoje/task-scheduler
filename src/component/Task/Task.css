@@ -46,7 +46,7 @@
   overflow-wrap: break-word;
 }
 
-span .edit-btn {
+.edit-btn {
     cursor: pointer;
     margin: 0 10px;
 }
@@ -64,5 +64,21 @@ span .edit-btn {
         width: 300px;
         /* position: relative; */
     }
+
+    .task-container h1{
+        font-size: 20px;
+    }
+
+    .task-container h2{
+       
+        font-size: 15px;
+     
+    }
+
+    .task-priority {
+        
+      font-size: 13px;
+    }
+    
     
 }

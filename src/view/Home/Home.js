@@ -28,6 +28,12 @@ const Home = () => {
     }
     
   },[])
+  // const readfromloacal=()=>{
+  //   const list = JSON.parse(localStorage.getItem('todo'))
+  //   if(list && list.length > 0)
+  //   {
+  //     setTask(list)
+  //   } }
 
   
   const addTaskToList = () => {
@@ -65,7 +71,9 @@ const Home = () => {
 
     setFieldClear()
     saveTaskToLocalStorage(newList);
-    showToast('Task added successfully', 'success', 3000);}
+  
+    showToast('Task added successfully', 'success', 3000);
+  }
 
   const removeTaskFromList = (obj) => {
     const index = task.indexOf(obj)
@@ -105,7 +113,7 @@ const Home = () => {
       {
         indexToUpdate = i
       }
-      showToast('Task updated successfully', 'info');
+      
     })
 
     const tempAarry = task;
@@ -123,6 +131,7 @@ const Home = () => {
     setId(-1)
     setIsEdit(false)
     setFieldClear()
+    showToast('Task updated successfully', 'info');
     // instead of doing this repetadly we can make a function for same task
     
   }
@@ -221,4 +230,4 @@ const Home = () => {
   )
 }
  
-export default Home
+export default Home;
